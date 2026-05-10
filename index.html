@@ -1,392 +1,432 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-<title>MVAi Drive</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MVAi Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-    background:#070b1a;
-    color:white;
-    overflow-x:hidden;
+background:#050816;
+color:white;
+display:flex;
+min-height:100vh;
+overflow-x:hidden;
 }
 
-/* NAVBAR */
+/* SIDEBAR */
 
-nav{
-    width:100%;
-    padding:20px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(255,255,255,0.03);
-    backdrop-filter:blur(10px);
-    position:sticky;
-    top:0;
-    z-index:1000;
+.sidebar{
+width:270px;
+background:rgba(255,255,255,0.04);
+border-right:1px solid rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+padding:30px 20px;
+position:fixed;
+height:100vh;
 }
 
 .logo{
-    font-size:32px;
-    font-weight:700;
-    color:#00e5ff;
+font-size:34px;
+font-weight:700;
+color:#00d9ff;
+margin-bottom:50px;
 }
 
-.nav-links a{
-    text-decoration:none;
-    color:white;
-    margin-left:25px;
-    transition:.3s;
+.menu{
+display:flex;
+flex-direction:column;
+gap:15px;
 }
 
-.nav-links a:hover{
-    color:#00e5ff;
+.menu a{
+text-decoration:none;
+color:#cfcfcf;
+padding:16px 18px;
+border-radius:16px;
+transition:.3s;
+font-size:16px;
+}
+
+.menu a:hover,
+.menu a.active{
+background:#00d9ff;
+color:#000;
+font-weight:600;
+}
+
+.storage-card{
+margin-top:40px;
+padding:25px;
+background:linear-gradient(135deg,#00d9ff22,#ffffff08);
+border-radius:24px;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.storage-card h3{
+margin-bottom:15px;
+}
+
+.progress{
+width:100%;
+height:12px;
+background:#17203a;
+border-radius:30px;
+overflow:hidden;
+margin-bottom:12px;
+}
+
+.progress-bar{
+width:55%;
+height:100%;
+background:#00d9ff;
+}
+
+.storage-card p{
+font-size:14px;
+color:#cfcfcf;
+}
+
+/* MAIN */
+
+.main{
+margin-left:270px;
+width:calc(100% - 270px);
+padding:35px;
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.search-box{
+flex:1;
+min-width:250px;
+}
+
+.search-box input{
+width:100%;
+padding:16px 20px;
+background:#11182c;
+border:none;
+outline:none;
+border-radius:18px;
+color:white;
+font-size:15px;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.profile{
+width:55px;
+height:55px;
+border-radius:50%;
+background:#00d9ff;
+color:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:700;
+font-size:18px;
 }
 
 /* HERO */
 
 .hero{
-    width:100%;
-    min-height:45vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:60px 7%;
+margin-top:35px;
+padding:40px;
+border-radius:32px;
+background:linear-gradient(135deg,#00d9ff22,#ffffff08);
+border:1px solid rgba(255,255,255,0.08);
+position:relative;
+overflow:hidden;
 }
 
-.hero-content h1{
-    font-size:60px;
-    margin-bottom:20px;
+.hero::before{
+content:'';
+position:absolute;
+width:300px;
+height:300px;
+background:#00d9ff;
+filter:blur(120px);
+opacity:0.12;
+right:-100px;
+top:-100px;
 }
 
-.hero-content h1 span{
-    color:#00e5ff;
+.hero h1{
+font-size:48px;
+margin-bottom:18px;
+position:relative;
 }
 
-.hero-content p{
-    color:#cfcfcf;
-    font-size:18px;
-    line-height:1.8;
+.hero h1 span{
+color:#00d9ff;
 }
 
-/* SEARCH */
-
-.search-box{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    margin-top:30px;
-}
-
-.search-box input{
-    width:500px;
-    max-width:90%;
-    padding:16px 20px;
-    border:none;
-    outline:none;
-    border-radius:40px;
-    background:#11182d;
-    color:white;
-    font-size:16px;
-    border:1px solid rgba(255,255,255,0.08);
+.hero p{
+color:#d0d0d0;
+line-height:1.8;
+max-width:700px;
+position:relative;
 }
 
 /* SECTION */
 
-.section{
-    padding:60px 7%;
-}
-
 .section-title{
-    font-size:38px;
-    margin-bottom:35px;
+margin-top:45px;
+margin-bottom:25px;
+font-size:30px;
 }
 
 .section-title span{
-    color:#00e5ff;
+color:#00d9ff;
 }
 
-/* GRID */
+/* FOLDER GRID */
 
 .folder-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:25px;
 }
 
-/* CARD */
-
 .folder-card{
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:24px;
-    padding:30px;
-    transition:.4s;
-    cursor:pointer;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+padding:28px;
+border-radius:28px;
+transition:.4s;
+position:relative;
+overflow:hidden;
+}
+
+.folder-card::before{
+content:'';
+position:absolute;
+width:180px;
+height:180px;
+background:#00d9ff;
+filter:blur(90px);
+opacity:0.06;
+right:-70px;
+top:-70px;
 }
 
 .folder-card:hover{
-    transform:translateY(-8px);
-    border-color:#00e5ff;
-    box-shadow:0 0 25px rgba(0,229,255,0.18);
+transform:translateY(-10px);
+border-color:#00d9ff;
+box-shadow:0 0 35px rgba(0,217,255,0.15);
 }
 
 .folder-icon{
-    font-size:55px;
-    margin-bottom:20px;
+font-size:52px;
+margin-bottom:18px;
+position:relative;
 }
 
 .folder-card h3{
-    font-size:25px;
-    margin-bottom:15px;
+font-size:24px;
+margin-bottom:12px;
+position:relative;
 }
 
 .folder-card p{
-    color:#cfcfcf;
-    line-height:1.7;
-    font-size:15px;
+font-size:14px;
+line-height:1.7;
+color:#cfcfcf;
+position:relative;
 }
 
-/* STORAGE */
+/* RECENT FILES */
 
-.storage-box{
-    margin-top:60px;
-    background:rgba(255,255,255,0.04);
-    border-radius:25px;
-    padding:35px;
-    border:1px solid rgba(255,255,255,0.08);
+.files{
+margin-top:15px;
+display:grid;
+gap:18px;
 }
 
-.storage-box h2{
-    margin-bottom:25px;
+.file-card{
+background:rgba(255,255,255,0.04);
+padding:22px 25px;
+border-radius:22px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:15px;
+border:1px solid rgba(255,255,255,0.08);
+transition:.3s;
 }
 
-.progress{
-    width:100%;
-    height:18px;
-    background:#1b233d;
-    border-radius:30px;
-    overflow:hidden;
+.file-card:hover{
+transform:scale(1.01);
+border-color:#00d9ff;
 }
 
-.progress-bar{
-    width:45%;
-    height:100%;
-    background:#00e5ff;
+.file-left{
+display:flex;
+align-items:center;
+gap:15px;
 }
 
-.storage-text{
-    margin-top:15px;
-    color:#cfcfcf;
+.file-icon{
+font-size:34px;
 }
 
-/* UPLOAD */
-
-.upload-box{
-    margin-top:50px;
-    text-align:center;
+.file-info h4{
+margin-bottom:5px;
 }
 
-.upload-box input{
-    margin-top:20px;
-    color:white;
+.file-info p{
+font-size:13px;
+color:#bdbdbd;
 }
 
-.upload-btn{
-    margin-top:20px;
-    padding:14px 30px;
-    border:none;
-    border-radius:40px;
-    background:#00e5ff;
-    color:#000;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
+.download-btn{
+padding:12px 20px;
+border:none;
+border-radius:14px;
+background:#00d9ff;
+color:#000;
+font-weight:600;
+cursor:pointer;
 }
 
-.upload-btn:hover{
-    transform:scale(1.05);
+/* FLOAT BUTTON */
+
+.float-btn{
+position:fixed;
+bottom:30px;
+right:30px;
+width:70px;
+height:70px;
+border-radius:50%;
+background:#00d9ff;
+color:#000;
+font-size:40px;
+border:none;
+font-weight:600;
+cursor:pointer;
+box-shadow:0 0 30px rgba(0,217,255,0.4);
+transition:.3s;
 }
 
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:30px;
-    color:#cfcfcf;
-    margin-top:50px;
-    border-top:1px solid rgba(255,255,255,0.08);
+.float-btn:hover{
+transform:scale(1.08);
 }
 
 /* MOBILE */
 
-@media(max-width:768px){
+@media(max-width:900px){
 
-    .hero-content h1{
-        font-size:40px;
-    }
+.sidebar{
+width:100%;
+height:auto;
+position:relative;
+border-right:none;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
 
-    .section-title{
-        font-size:30px;
-    }
+.main{
+margin-left:0;
+width:100%;
+padding:20px;
+}
 
-    .nav-links{
-        display:none;
-    }
+.hero h1{
+font-size:34px;
+}
+
+body{
+flex-direction:column;
+}
 
 }
 
-</style>
-
-</head>
-<body>
-
-<!-- NAVBAR -->
-
-<nav>
-
-<div class="logo">MVAi</div>
-
-<div class="nav-links">
-<a href="#">Home</a>
-<a href="#">Folders</a>
-<a href="#">Upload</a>
-<a href="#">Storage</a>
-</div>
-
-</nav>
-
-<!-- HERO -->
-
-<section class="hero">
-
-<div class="hero-content">
-
-<h1>Your Personal <span>MVAi Drive</span></h1>
-
-<p>
-Securely store your PDFs, notes, files and personal study material in one place.
-Create folders, manage documents and never lose important data again.
-</p>
-
-<div class="search-box">
-<input type="text" placeholder="Search files, PDFs, notes...">
-</div>
-
-</div>
-
-</section>
-
-<!-- FOLDERS -->
-
-<section class="section">
-
-<h2 class="section-title">Your <span>Folders</span></h2>
-
-<div class="folder-grid">
-
-<div class="folder-card">
-<div class="folder-icon">📘</div>
-<h3>UPSC Notes</h3>
-<p>
-Store GS notes, answer writing PDFs, current affairs and study material.
-</p>
-</div>
-
-<div class="folder-card">
-<div class="folder-icon">📝</div>
-<h3>Hindi Literature</h3>
-<p>
-Save Hindi literature notes, poems, summaries and optional preparation files.
-</p>
-</div>
-
-<div class="folder-card">
-<div class="folder-icon">⚖️</div>
-<h3>Ethics</h3>
-<p>
-Keep ethics notes, thinkers, case studies and examples organized.
-</p>
-</div>
-
-<div class="folder-card">
-<div class="folder-icon">🎯</div>
-<h3>One Day Exam</h3>
-<p>
-Store SSC, Railway, Police, Banking and all one day exam preparation files.
-</p>
-</div>
-
-<div class="folder-card">
-<div class="folder-icon">📂</div>
-<h3>Personal Documents</h3>
-<p>
-Keep Aadhaar, certificates, resume, photos and important PDFs secure.
-</p>
-</div>
-
-<div class="folder-card">
-<div class="folder-icon">💡</div>
-<h3>Ideas & Drafts</h3>
-<p>
-Write and save your ideas, poems, website concepts and personal drafts.
-</p>
-</div>
-
-</div>
-
-<!-- STORAGE -->
-
-<div class="storage-box">
-
-<h2>Storage Usage</h2>
-
+</style></head>
+<body><!-- SIDEBAR --><div class="sidebar"><div class="logo">MVAi</div><div class="menu">
+<a href="#" class="active">🏠 Dashboard</a>
+<a href="#">📁 My Folders</a>
+<a href="#">📄 PDFs</a>
+<a href="#">☁️ Uploads</a>
+<a href="#">⭐ Favorites</a>
+<a href="#">⚙️ Settings</a>
+</div><div class="storage-card">
+<h3>Storage</h3>
 <div class="progress">
 <div class="progress-bar"></div>
 </div>
-
-<p class="storage-text">
-4.5 GB Used of 10 GB Storage
+<p>5.5 GB used of 10 GB</p>
+</div></div><!-- MAIN --><div class="main"><div class="topbar"><div class="search-box">
+<input type="text" placeholder="Search notes, PDFs, files...">
+</div><div class="profile">M</div></div><!-- HERO --><div class="hero">
+<h1>Your Personal <span>MVAi Cloud</span></h1>
+<p>
+Manage your UPSC notes, PDFs, personal documents and ideas in one premium dashboard.
+Never lose your files again.
 </p>
-
+</div><!-- FOLDERS --><h2 class="section-title">My <span>Folders</span></h2><div class="folder-grid"><div class="folder-card">
+<div class="folder-icon">📘</div>
+<h3>UPSC Notes</h3>
+<p>GS notes, current affairs, answer writing and study material.</p>
+</div><div class="folder-card">
+<div class="folder-icon">📝</div>
+<h3>Hindi Literature</h3>
+<p>Optional notes, poems, summaries and literature files.</p>
+</div><div class="folder-card">
+<div class="folder-icon">⚖️</div>
+<h3>Ethics</h3>
+<p>Case studies, thinkers, examples and ethics content.</p>
+</div><div class="folder-card">
+<div class="folder-icon">🎯</div>
+<h3>One Day Exam</h3>
+<p>SSC, Railway, Banking, Police and one day exam files.</p>
+</div><div class="folder-card">
+<div class="folder-icon">📂</div>
+<h3>Documents</h3>
+<p>Certificates, Aadhaar, resume and important PDFs.</p>
+</div><div class="folder-card">
+<div class="folder-icon">💡</div>
+<h3>Ideas & Drafts</h3>
+<p>Poems, concepts, scripts and personal writings.</p>
+</div></div><!-- RECENT FILES --><h2 class="section-title">Recent <span>Files</span></h2><div class="files"><div class="file-card">
+<div class="file-left">
+<div class="file-icon">📄</div>
+<div class="file-info">
+<h4>Ethics Notes.pdf</h4>
+<p>Uploaded 2 days ago</p>
 </div>
-
-<!-- UPLOAD -->
-
-<div class="upload-box">
-
-<h2 class="section-title">Upload <span>Files</span></h2>
-
-<input type="file">
-
-<br>
-
-<button class="upload-btn">Upload Now</button>
-
 </div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-
-© 2026 MVAi Drive | Personal Cloud Storage
-
-</footer>
+<button class="download-btn">Open</button>
+</div><div class="file-card">
+<div class="file-left">
+<div class="file-icon">📘</div>
+<div class="file-info">
+<h4>GS2 Answer Writing.docx</h4>
+<p>Uploaded yesterday</p>
+</div>
+</div>
+<button class="download-btn">Open</button>
+</div><div class="file-card">
+<div class="file-left">
+<div class="file-icon">🖼️</div>
+<div class="file-info">
+<h4>Personal Photo.png</h4>
+<p>Uploaded today</p>
+</div>
+</div>
+<button class="download-btn">Open</button>
+</div></div></div><button class="float-btn">+</button>
 
 </body>
-  </html>
+</html>
